@@ -59,6 +59,7 @@ export function getNavGroups(account: Account | null | undefined): NavGroup[] {
       {key: "/organizations", label: i18next.t("general:Organizations")},
       {key: "/groups", label: i18next.t("general:Groups")},
       {key: "/users", label: i18next.t("general:Users")},
+      {key: "/quant-assets", label: i18next.t("general:User Assets")},
       {key: "/invitations", label: i18next.t("general:Invitations")},
     ],
   });

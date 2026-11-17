@@ -36,6 +36,7 @@ const OrganizationListPage = React.lazy(() => import("@/pages/OrganizationListPa
 const OrganizationEditPage = React.lazy(() => import("@/pages/OrganizationEditPage"));
 const UserListPage = React.lazy(() => import("@/pages/UserListPage"));
 const UserEditPage = React.lazy(() => import("@/pages/UserEditPage"));
+const QuantAssetsPage = React.lazy(() => import("@/pages/QuantAssetsPage"));
 const GroupListPage = React.lazy(() => import("@/pages/GroupListPage"));
 const GroupEditPage = React.lazy(() => import("@/pages/GroupEditPage"));
 const GroupTreePage = React.lazy(() => import("@/pages/GroupTreePage"));
@@ -273,6 +274,7 @@ export default function App() {
           <Route path="/organizations/:organizationName" element={<OrganizationEditPage />} />
           <Route path="/organizations/:organizationName/users" element={<UserListPage />} />
           <Route path="/users" element={<UserListPage />} />
+          <Route path="/quant-assets" element={<QuantAssetsPage />} />
           <Route path="/users/:organizationName/:userName" element={<UserEditPage />} />
           <Route path="/groups" element={<GroupListPage />} />
           <Route path="/groups/:organizationName/:groupName" element={<GroupEditPage />} />

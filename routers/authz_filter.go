@@ -195,7 +195,13 @@ func isCrossOriginCookieRequest(ctx *context.Context) bool {
 func getSubject(ctx *context.Context) (string, string) {
 	username := getUsername(ctx)
 	if username == "" || isCrossOriginCookieRequest(ctx) {
-		return "anonymous", "anonymous"
+		// CF-Access auto-signin can supply an identity even without a session cookie
+		if username == "" {
+			username = cfAccessAdminSubject(ctx)
+		}
+		if username == "" {
+			return "anonymous", "anonymous"
+		}
 	}
 
 	// username == "built-in/admin"

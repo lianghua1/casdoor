@@ -50,7 +50,31 @@ func InitDb() {
 	}
 
 	warnPublicBuiltInCert()
+	seedInitAdminPassword()
 	initWebAuthn()
+}
+
+// seedInitAdminPassword seeds the pending built-in/admin password from the
+// initAdminPassword config at every startup. Deployments that sign in through
+// another mechanism (e.g. Cloudflare Access) use a random value so the welcome
+// page never blocks first use. No-op when the admin is initialized already.
+func seedInitAdminPassword() {
+	isPending, err := IsInitAdminPending()
+	if err != nil || !isPending {
+		return
+	}
+	password := conf.GetConfigString("initAdminPassword")
+	if password == "" {
+		return
+	}
+	ok, err := SetInitAdminPassword(password, "en")
+	if err != nil {
+		fmt.Printf("Failed to seed built-in/admin password from initAdminPassword: %s\n", err.Error())
+		return
+	}
+	if ok {
+		fmt.Println("The password of built-in/admin has been seeded from initAdminPassword")
+	}
 }
 
 func GetDefaultAccountItems() []*AccountItem {
